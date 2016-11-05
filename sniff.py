@@ -107,16 +107,21 @@ if __name__ == "__main__":
 	import argparse
 	parser = argparse.ArgumentParser()
 	parser.add_argument('logfile')
+	parser.add_argument('-w', '--weeks', type=int, default=0)
 	args = parser.parse_args()
 
 	log = []
 	with open(args.logfile, "r") as f:
 		for line in f:
 			x = map(lambda x: x.strip(), line.split('|'))
+			dt=dateutil.parser.parse(x[0])
+			if args.weeks > 0:
+				if dt < datetime.datetime.now()-datetime.timedelta(weeks=args.weeks):
+					continue
 			msg = x[4]
 			e = process_event(msg)
 			log.append(Ts3LogRow(
-				dt=dateutil.parser.parse(x[0]),
+				dt=dt,
 				level=x[1],
 				cls=x[2],
 				msg=msg,
