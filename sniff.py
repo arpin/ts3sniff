@@ -54,22 +54,21 @@ class Connections(object):
 				else:
 					self.usernames[x.userid].add(x.user)
 		# get times connected for each userid
-		for userid in self.usernames.keys():
-			for x in log:
-				if x.userid == userid and (x.event.name == 'connected' or x.event.name == 'disconnected'):
-					if x.userid not in self.connections:
-						self.connections[x.userid] = [[None,None,0]]
-					# the last conn/disconn pair is already filled, create a new
-					if self.connections[x.userid][-1][1] is not None:
-						self.connections[x.userid].append([None,None,0])
-					# fill the last conn/disconn pair
-					if x.event.name == 'connected':
-						self.connections[x.userid][-1][0] = x
-					elif x.event.name == 'disconnected':
-						self.connections[x.userid][-1][1] = x
-						a = self.connections[x.userid][-1][0]
-						b = self.connections[x.userid][-1][1]
-						self.connections[x.userid][-1][2] = (b.dt-a.dt).total_seconds() if a is not None and b is not None else 0
+		for x in log:
+			if x.event.name == 'connected' or x.event.name == 'disconnected':
+				if x.userid not in self.connections:
+					self.connections[x.userid] = [[None,None,0]]
+				# the last conn/disconn pair is already filled, create a new
+				if self.connections[x.userid][-1][1] is not None:
+					self.connections[x.userid].append([None,None,0])
+				# fill the last conn/disconn pair
+				if x.event.name == 'connected':
+					self.connections[x.userid][-1][0] = x
+				elif x.event.name == 'disconnected':
+					self.connections[x.userid][-1][1] = x
+					a = self.connections[x.userid][-1][0]
+					b = self.connections[x.userid][-1][1]
+					self.connections[x.userid][-1][2] = (b.dt-a.dt).total_seconds() if a is not None and b is not None else 0
 	def userid2name(self,userid):
 		return ", ".join(self.usernames[userid])
 	def overview(self):
