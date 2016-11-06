@@ -134,5 +134,5 @@ if __name__ == "__main__":
 			
 	c = Connections()
 	c.chew(log)	
-	c.printoverview()
+	#c.printoverview()
 	c.csvdump()

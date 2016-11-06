@@ -32,7 +32,8 @@
       <div class="row overview-table">
 		<?php include('overview.html'); ?>
 		<p class="updatedate"><?php echo "Updated on ".date("F d Y H:i:s.",filemtime("overview.html")); ?></p>
-      </div>
+	    <p><a href="output.txt">output</a></p>
+	  </div>
     </div>
   </div>
 
