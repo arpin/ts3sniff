@@ -18,20 +18,25 @@
 
   <div class="section">
     <div class="container">
-	  <h2>Latest connections by hour</h2>
       <div class="row">
+	    <h3>Latest connections by hour</h3>
 		<a href="connected.png"><img class="u-max-full-width" src="connected.png" alt="Connections"  /></a>
-		<p class="updatedate"><?php echo "Updated on ".date("F d Y H:i:s.",filemtime("connected.png")); ?></p>
+		<p class="updatedate"><?php echo "Updated on ".date("F d Y H:i:s (e)",filemtime("connected.png")); ?></p>
+      </div>
+	  <div class="row">
+	    <h3>Latest disconnections by hour</h3>
+		<a href="disconnected.png"><img class="u-max-full-width" src="disconnected.png" alt="Connections"  /></a>
+		<p class="updatedate"><?php echo "Updated on ".date("F d Y H:i:s (e)",filemtime("disconnected.png")); ?></p>
       </div>
     </div>
   </div>
   
   <div class="section">
     <div class="container">
-	  <h2>Overview</h2>
+	  <h3>Overview</h3>
       <div class="row overview-table">
 		<?php include('overview.html'); ?>
-		<p class="updatedate"><?php echo "Updated on ".date("F d Y H:i:s.",filemtime("overview.html")); ?></p>
+		<p class="updatedate"><?php echo "Updated on ".date("F d Y H:i:s (e)",filemtime("overview.html")); ?></p>
 	    <p><a href="output.txt">output</a></p>
 	  </div>
     </div>
